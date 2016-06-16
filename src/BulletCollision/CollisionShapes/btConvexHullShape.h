@@ -68,6 +68,7 @@ public:
 		return m_unscaledPoints.size();
 	}
 
+	void updatePoints(const btScalar* points, int numPoints, int stride = sizeof(btVector3));
 	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
 	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;

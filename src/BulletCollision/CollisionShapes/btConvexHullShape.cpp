@@ -57,6 +57,24 @@ void btConvexHullShape::addPoint(const btVector3& point, bool recalculateLocalAa
 
 }
 
+void btConvexHullShape::updatePoints(const btScalar* points, int numPoints, int stride)
+{
+	const btScalar* ptr = points;
+	unsigned char* address = (unsigned char*)points;
+
+	// In case the number of points differ.
+	m_unscaledPoints.resize(numPoints);
+
+	for (int index = 0; index < numPoints; ++index)
+	{
+		btScalar* point = (btScalar*)address;
+		m_unscaledPoints[index] = btVector3(point[0], point[1], point[2]);
+		address += stride;
+	}
+
+	recalcLocalAabb();
+}
+
 btVector3	btConvexHullShape::localGetSupportingVertexWithoutMargin(const btVector3& vec)const
 {
 	btVector3 supVec(btScalar(0.),btScalar(0.),btScalar(0.));
